@@ -1,0 +1,57 @@
+{
+  "name": "mcp-kb",
+  "version": "1.0.0",
+  "description": "MCP server for knowledge base with Mastra.ai and pgvector",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-kb": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "watch": "tsx watch src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "knowledge-base",
+    "vector-database",
+    "mastra",
+    "pgvector",
+    "mcp-server",
+    "semantic-search",
+    "rag"
+  ],
+  "author": "Alejandro Junco",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alejandrojunco/mcp-kb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alejandrojunco/mcp-kb/issues"
+  },
+  "homepage": "https://github.com/alejandrojunco/mcp-kb#readme",
+  "dependencies": {
+    "@ai-sdk/openai": "^1.0.0",
+    "@mastra/core": "latest",
+    "@mastra/pg": "latest",
+    "@mastra/rag": "^1.3.0",
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "ai": "^4.0.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
