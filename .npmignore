@@ -1,0 +1,64 @@
+# Source files (only ship compiled code)
+src/
+tsconfig.json
+
+# Development files
+.env
+.env.*
+.env.template
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+__tests__/
+test/
+
+# Development tools
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+
+# Docker (if not needed for package users)
+docker-compose.yml
+Dockerfile
+init-db.sql
+
+# Documentation that doesn't need to ship
+START.md
+
+# Build artifacts we don't need
+*.tsbuildinfo
+.cache/
+*.tmp
+
+# Keep these files:
+# - dist/ (compiled code)
+# - README.md (documentation)
+# - LICENSE (required)
+# - package.json (required)
+

@@ -17,9 +17,36 @@ An MCP (Model Context Protocol) server that provides a knowledge base interface 
 
 ## Installation
 
+### For End Users (Using with MCP Clients)
+
+If you want to use this package with Cursor, Claude Desktop, or other MCP clients:
+
+**No installation needed!** Just add the configuration to your MCP settings file (see [Configuration with MCP Clients](#configuration-with-mcp-clients) below).
+
+The package will be automatically downloaded via `npx` when first used.
+
+**Optional**: Install globally for faster startup:
+```bash
+npm install -g mcp-kb
+```
+
+**Prerequisites**:
+1. **PostgreSQL with pgvector** installed and running
+2. **OpenAI API key** for embeddings
+3. **Set up your database**:
+   ```sql
+   CREATE EXTENSION IF NOT EXISTS vector;
+   ```
+
+Then configure your MCP client with your database credentials (see configuration examples below).
+
+### For Developers (Local Development)
+
+If you want to contribute or modify the code:
+
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/alejandrojunco/mcp-kb.git
 cd mcp-kb
 ```
 
@@ -30,21 +57,23 @@ npm install
 
 3. Set up PostgreSQL with pgvector:
 ```bash
-# Install pgvector extension in your PostgreSQL database
+# Connect to your PostgreSQL database and run:
 CREATE EXTENSION IF NOT EXISTS vector;
 ```
 
 4. Configure environment variables:
-```bash
-cp .env.template .env
-```
 
-Edit `.env` and add your configuration:
+Create a `.env` file in the project root:
 ```env
 POSTGRES_CONNECTION_STRING=postgresql://user:password@localhost:5432/knowledge_base
 OPENAI_API_KEY=your_openai_api_key_here
 VECTOR_INDEX_NAME=knowledge_base
 VECTOR_DIMENSION=1536
+```
+
+5. Build the project:
+```bash
+npm run build
 ```
 
 ## Publishing to npm
@@ -218,7 +247,7 @@ To use this MCP server in Cursor, you need to configure it in your MCP settings 
 
 #### Option A: Using the npm Package (Recommended)
 
-If the package is published to npm, this is the easiest way to use it:
+This is the easiest way to use the package. The package will be automatically downloaded and run by npx.
 
 **Step 1: Configure Cursor**
 
@@ -229,10 +258,7 @@ Create or edit the MCP configuration file at `~/.cursor/mcp.json`:
   "mcpServers": {
     "knowledge-base": {
       "command": "npx",
-      "args": [
-        "-y",
-        "mcp-kb"
-      ],
+      "args": ["-y", "mcp-kb"],
       "env": {
         "POSTGRES_CONNECTION_STRING": "postgresql://user:password@localhost:5432/knowledge_base",
         "OPENAI_API_KEY": "your_openai_api_key_here",
@@ -244,16 +270,22 @@ Create or edit the MCP configuration file at `~/.cursor/mcp.json`:
 }
 ```
 
-**Using a Specific Version:**
+**Important**: Replace the environment variable values with your actual credentials:
+- `POSTGRES_CONNECTION_STRING`: Your PostgreSQL connection string
+- `OPENAI_API_KEY`: Your OpenAI API key
+- `VECTOR_INDEX_NAME`: Name for your vector index (default: knowledge_base)
+- `VECTOR_DIMENSION`: Embedding dimension (default: 1536 for text-embedding-3-small)
+
+**Optional: Using a Specific Version**
+
+To pin to a specific version, specify it in the args:
+
 ```json
 {
   "mcpServers": {
     "knowledge-base": {
       "command": "npx",
-      "args": [
-        "-y",
-        "mcp-kb@1.0.0"
-      ],
+      "args": ["-y", "mcp-kb@1.0.0"],
       "env": {
         "POSTGRES_CONNECTION_STRING": "postgresql://user:password@localhost:5432/knowledge_base",
         "OPENAI_API_KEY": "your_openai_api_key_here",
@@ -264,6 +296,16 @@ Create or edit the MCP configuration file at `~/.cursor/mcp.json`:
   }
 }
 ```
+
+**Optional: Install Globally**
+
+While npx will automatically download the package, you can also install it globally for faster startup:
+
+```bash
+npm install -g mcp-kb
+```
+
+Your MCP configuration remains the same - npx will use the globally installed version if available.
 
 **Step 2: Restart Cursor**
 
