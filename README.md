@@ -8,6 +8,18 @@ An MCP (Model Context Protocol) server that provides a knowledge base interface 
 - **Query Knowledge**: Search for relevant information using semantic similarity
 - **List Knowledge**: Get statistics about the knowledge base
 - **Delete Knowledge**: Remove specific items from the knowledge base
+- **Privacy-First**: You own and control your data at all times - host your vector store however you see fit
+
+## Privacy & Data Ownership
+
+**Your data, your control.** Unlike cloud-based knowledge base solutions, this MCP server gives you complete ownership and control over your knowledge base:
+
+- 🔒 **Self-Hosted**: All data stays on your infrastructure - whether that's your local machine, private server, or cloud provider of your choice
+- 🔑 **Full Control**: You own the database, you control access, and you decide data retention policies
+- 🛡️ **Privacy by Design**: No third-party storage of your knowledge base - only the OpenAI API is used for generating embeddings (which are one-way transformations)
+- 🏠 **Host Anywhere**: Use PostgreSQL locally with Docker, on your own server, or with any PostgreSQL provider (AWS RDS, Google Cloud SQL, Azure, Supabase, etc.)
+
+This architecture ensures your proprietary code, internal documentation, and sensitive information never leaves your control.
 
 ## Prerequisites
 
